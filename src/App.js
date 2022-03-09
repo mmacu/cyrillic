@@ -47,6 +47,10 @@ function App() {
   }, [currentLetter])
 
   const submitAnswer = (answer) => {
+    const audioPath = process.env.PUBLIC_URL + `/sounds/${currentLetter.uppercase}.mp3`
+    console.log('trying to play', audioPath)
+    let audio = new Audio(audioPath)
+    audio.play()
     if (showNextButton) {
       return
     }
@@ -79,7 +83,7 @@ function App() {
           <Stack direction="column" spacing={2}>
             <Box>
               <Typography variant="h3" align="center">
-                {currentLetter.uppercase}
+                {currentLetter.uppercase} {currentLetter.lowercase}
               </Typography>
             </Box>
             <Grid container spacing={2}>
