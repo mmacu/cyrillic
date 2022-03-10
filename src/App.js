@@ -26,7 +26,7 @@ function App() {
   const getAnswers = (correct) => {
     const answers = getRandomSubarray(
       cyrillic.filter((element) => element !== correct),
-      ANSWER_COUNT 
+      ANSWER_COUNT
     )
     const randomIdx = getRandomInt(answers.length - 1)
     answers[randomIdx] = currentLetter
@@ -83,47 +83,64 @@ function App() {
     }
   }
 
+  const isFinished = () => {
+    return lettersLeft.length === 0 && currentLetterAnswered
+  }
+
   return (
     <>
       <CssBaseline />
-      <Container sx={{padding: 0, paddingRight: 2}}>
-        <Box sx={{ marginTop: 6, maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
-          <Stack direction="column" spacing={2}>
-            <Box>
-              <Typography variant="h3" align="center">
-                {currentLetter.uppercase} {currentLetter.lowercase}
-              </Typography>
-            </Box>
-            <Grid container spacing={2} sx={{padding: 0, paddingRight: 2}}>
-              {currentAnswers.map((answer, idx) => (
-                <Grid item key={answer.uppercase} xs={4}>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    style={{ textTransform: 'none' }}
-                    color={getButtonColor(answer)}
-                    onClick={() => submitAnswer(answer, idx)}
-                  >
-                    {answer.name}
-                  </Button>
-                </Grid>
-              ))}
-              <Grid item xs={12}>
-                <LinearProgress variant="determinate" value={(progress * 100) / cyrillic.length} />
-              </Grid>
-              <Grid item xs={12}>
-                <Button disabled={!currentLetterAnswered} size="large" fullWidth variant="contained" onClick={() => goNext()}>
-                  Next
+      <Container>
+        <Paper
+          elevation={2}
+          sx={{
+            marginTop: 6,
+            maxWidth: 440,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            minHeight: '40vh',
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: 'column',
+            borderRadius: 4,
+            padding: 4,
+          }}
+        >
+          <Box sx={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography variant="h3">
+              {currentLetter.uppercase} {currentLetter.lowercase}
+            </Typography>
+          </Box>
+          <Grid container spacing={2}>
+            {currentAnswers.map((answer, idx) => (
+              <Grid item key={answer.uppercase} xs={4}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  style={{ textTransform: 'none' }}
+                  color={getButtonColor(answer)}
+                  onClick={() => submitAnswer(answer, idx)}
+                >
+                  {answer.name}
                 </Button>
               </Grid>
+            ))}
+            <Grid item xs={12}>
+              <LinearProgress variant="determinate" value={(progress * 100) / cyrillic.length} />
             </Grid>
-            {lettersLeft.length === 0 && currentLetterAnswered && (
-              <Typography variant="h4" align="center">
-                Congratulations! You've got all the letters right.
-              </Typography>
-            )}
-          </Stack>
-        </Box>
+            <Grid item xs={12}>
+              <Button
+                disabled={!currentLetterAnswered}
+                size="large"
+                fullWidth
+                variant="contained"
+                onClick={() => goNext()}
+              >
+                Next
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
       </Container>
     </>
   )
