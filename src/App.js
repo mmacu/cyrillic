@@ -1,10 +1,19 @@
 import cyrillic from './cyrillic.json'
 import React, { useState, useEffect } from 'react'
-import { Container, CssBaseline, Button, Grid, Paper, Stack, Box, Typography, LinearProgress } from '@mui/material'
+import { Container, CssBaseline, Button, Grid, Paper, Box, Typography, LinearProgress } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const ANSWER_COUNT = 6
 
 function App() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const theme = React.useMemo(() => createTheme({
+    palette: {
+      mode: prefersDarkMode ? 'dark' : 'light'
+    }
+  }))
+
   const getRandomSubarray = (arr, size) => {
     var shuffled = arr.slice(0),
       i = arr.length,
@@ -88,7 +97,7 @@ function App() {
   }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
         <Paper
@@ -142,7 +151,7 @@ function App() {
           </Grid>
         </Paper>
       </Container>
-    </>
+    </ThemeProvider>
   )
 }
 
