@@ -135,7 +135,7 @@ function App() {
                 <Button
                   variant="outlined"
                   fullWidth
-                  style={{ textTransform: 'none' }}
+                  style={{ textTransform: 'none', fontSize: 16 }}
                   color={getButtonColor(answer)}
                   onClick={() => submitAnswer(answer, idx)}
                 >
