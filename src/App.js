@@ -8,11 +8,24 @@ const ANSWER_COUNT = 6
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  const theme = React.useMemo(() => createTheme({
-    palette: {
-      mode: prefersDarkMode ? 'dark' : 'light'
+  const theme = React.useMemo(() =>
+    createTheme({
+      palette: {
+        mode: prefersDarkMode ? 'dark' : 'light',
+      },
+    })
+  )
+
+  const shuffleArray = (array) => {
+    let currentIndex = array.length,
+      randomIndex
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+      ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
     }
-  }))
+    return array
+  }
 
   const getRandomSubarray = (arr, size) => {
     var shuffled = arr.slice(0),
@@ -38,26 +51,21 @@ function App() {
       ANSWER_COUNT
     )
     const randomIdx = getRandomInt(answers.length - 1)
-    answers[randomIdx] = currentLetter
+    answers[randomIdx] = lettersLeft[0]
     return answers
   }
 
-  const [lettersLeft, setLettersLeft] = useState([...cyrillic])
-  const [currentLetter, setCurrentLetter] = useState(cyrillic[0])
-  const [currentAnswers, setCurrentAnswers] = useState(getAnswers(cyrillic[0]))
+  const [lettersLeft, setLettersLeft] = useState(shuffleArray([...cyrillic]))
+  const [currentAnswers, setCurrentAnswers] = useState([])
   const [currentLetterAnswered, setCurrentLetterAnswered] = useState(false)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    lettersLeft.shift()
+    setCurrentAnswers(getAnswers(lettersLeft[0]))
   }, [])
 
-  useEffect(() => {
-    setCurrentAnswers(getAnswers(currentLetter))
-  }, [currentLetter])
-
   const playAudio = () => {
-    const audioPath = process.env.PUBLIC_URL + `/sounds/${currentLetter.uppercase}.mp3`
+    const audioPath = process.env.PUBLIC_URL + `/sounds/${lettersLeft[0].uppercase}.mp3`
     let audio = new Audio(audioPath)
     audio.play()
   }
@@ -68,8 +76,8 @@ function App() {
       return
     }
     setCurrentLetterAnswered(true)
-    if (answer !== currentLetter) {
-      lettersLeft.push(currentLetter)
+    if (answer !== lettersLeft[0]) {
+      lettersLeft.push(lettersLeft[0])
     } else {
       setProgress((oldValue) => oldValue + 1)
     }
@@ -77,7 +85,8 @@ function App() {
 
   const goNext = () => {
     if (lettersLeft.length > 0) {
-      setCurrentLetter(lettersLeft.shift())
+      lettersLeft.shift()
+      setCurrentAnswers(getAnswers(lettersLeft[0]))
     }
     setCurrentLetterAnswered(false)
   }
@@ -85,7 +94,7 @@ function App() {
   const getButtonColor = (answer) => {
     if (!currentLetterAnswered) {
       return 'primary'
-    } else if (currentLetter === answer) {
+    } else if (lettersLeft[0] === answer) {
       return 'success'
     } else {
       return 'error'
@@ -117,7 +126,7 @@ function App() {
         >
           <Box sx={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Typography variant="h3">
-              {currentLetter.uppercase} {currentLetter.lowercase}
+              {lettersLeft[0].uppercase} {lettersLeft[0].lowercase}
             </Typography>
           </Box>
           <Grid container spacing={2}>
