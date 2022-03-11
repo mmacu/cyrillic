@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Container, CssBaseline, Button, Grid, Paper, Box, Typography, LinearProgress } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTranslation } from 'react-i18next'
 
 const ANSWER_COUNT = 6
 
 function App() {
+  const [t, i18n] = useTranslation()
+
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const theme = React.useMemo(() =>
     createTheme({
@@ -139,7 +142,7 @@ function App() {
                   color={getButtonColor(answer)}
                   onClick={() => submitAnswer(answer, idx)}
                 >
-                  {answer.name}
+                  {t(answer.uppercase)}
                 </Button>
               </Grid>
             ))}
