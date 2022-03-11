@@ -66,7 +66,7 @@ function App() {
 
   useEffect(() => {
     setCurrentAnswers(getAnswers(lettersLeft[0]))
-  }, [])
+  }, [lettersLeft])
 
   const playLetterAudio = () => {
     const audioPath = process.env.PUBLIC_URL + `/sounds/letters/${lettersLeft[0].uppercase}.mp3`
@@ -95,7 +95,6 @@ function App() {
     if (isFinished()) {
       const shuffledCyrillic = shuffleArray([...cyrillic])
       setLettersLeft(shuffledCyrillic)
-      setCurrentAnswers(getAnswers(shuffledCyrillic[0]))
       setProgress(0)
     } else if (lettersLeft.length > 0) {
       lettersLeft.shift()
