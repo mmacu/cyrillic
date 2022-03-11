@@ -68,14 +68,14 @@ function App() {
     setCurrentAnswers(getAnswers(lettersLeft[0]))
   }, [])
 
-  const playAudio = () => {
-    const audioPath = process.env.PUBLIC_URL + `/sounds/${lettersLeft[0].uppercase}.mp3`
+  const playLetterAudio = () => {
+    const audioPath = process.env.PUBLIC_URL + `/sounds/letters/${lettersLeft[0].uppercase}.mp3`
     let audio = new Audio(audioPath)
     audio.play()
   }
 
   const submitAnswer = (answer) => {
-    playAudio()
+    playLetterAudio()
     if (currentLetterAnswered) {
       return
     }
