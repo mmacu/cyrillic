@@ -31,5 +31,7 @@
     "\u042c": "soft sign",
     "\u042d": "e",
     "\u042e": "yu",
-    "\u042f": "ya"
+    "\u042f": "ya",
+    "restart": "RESTART",
+    "next": "NEXT"
 }

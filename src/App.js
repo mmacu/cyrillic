@@ -2,6 +2,7 @@ import cyrillic from './cyrillic.json'
 import React, { useState, useEffect } from 'react'
 import { Container, CssBaseline, Button, Grid, Paper, Box, Typography, LinearProgress } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import RestartAltIcon from '@mui/icons-material/RestartAlt'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTranslation } from 'react-i18next'
 
@@ -22,7 +23,7 @@ function App() {
   const shuffleArray = (array) => {
     let currentIndex = array.length,
       randomIndex
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex)
       currentIndex--
       ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
@@ -86,8 +87,17 @@ function App() {
     }
   }
 
+  const isFinished = () => {
+    return progress === cyrillic.length
+  }
+
   const goNext = () => {
-    if (lettersLeft.length > 0) {
+    if (isFinished()) {
+      const shuffledCyrillic = shuffleArray([...cyrillic])
+      setLettersLeft(shuffledCyrillic)
+      setCurrentAnswers(getAnswers(shuffledCyrillic[0]))
+      setProgress(0)
+    } else if (lettersLeft.length > 0) {
       lettersLeft.shift()
       setCurrentAnswers(getAnswers(lettersLeft[0]))
     }
@@ -104,10 +114,6 @@ function App() {
     }
   }
 
-  const isFinished = () => {
-    return lettersLeft.length === 0 && currentLetterAnswered
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -116,7 +122,7 @@ function App() {
           elevation={2}
           sx={{
             marginTop: 6,
-            maxWidth: 440,
+            maxWidth: 480,
             marginLeft: 'auto',
             marginRight: 'auto',
             minHeight: '40vh',
@@ -132,7 +138,7 @@ function App() {
               {lettersLeft[0].uppercase} {lettersLeft[0].lowercase}
             </Typography>
           </Box>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ marginTop: 2 }}>
             {currentAnswers.map((answer, idx) => (
               <Grid item key={answer.uppercase} xs={4}>
                 <Button
@@ -147,7 +153,7 @@ function App() {
               </Grid>
             ))}
             <Grid item xs={12}>
-              <LinearProgress variant="determinate" value={(progress * 100) / cyrillic.length} />
+              <LinearProgress variant="determinate" value={(progress / cyrillic.length) * 100} />
             </Grid>
             <Grid item xs={12}>
               <Button
@@ -156,8 +162,9 @@ function App() {
                 fullWidth
                 variant="contained"
                 onClick={() => goNext()}
+                startIcon={isFinished() ? <RestartAltIcon /> : null}
               >
-                Next
+                {isFinished() ? t('reset') : t('next')}
               </Button>
             </Grid>
           </Grid>
