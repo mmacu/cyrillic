@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTranslation } from 'react-i18next'
+import axios from 'axios'
 
 const ANSWER_COUNT = 6
 
@@ -64,6 +65,10 @@ function App() {
   const [currentLetterAnswered, setCurrentLetterAnswered] = useState(false)
   const [progress, setProgress] = useState(0)
 
+  useEffect(() => {
+    axios.get('https://api.countapi.xyz/hit/cyrillic.me/visits')
+  }, [])
+  
   useEffect(() => {
     setCurrentAnswers(getAnswers(lettersLeft[0]))
   }, [lettersLeft])
