@@ -18,8 +18,8 @@
     "example": ""
   },
   {
-    "uppercase": "\u0413",
-    "lowercase": "\u0433",
+    "uppercase": "\u0490",
+    "lowercase": "\u0491",
     "name": "g",
     "example": ""
   },
@@ -32,13 +32,7 @@
   {
     "uppercase": "\u0415",
     "lowercase": "\u0435",
-    "name": "ye",
-    "example": ""
-  },
-  {
-    "uppercase": "\u0401",
-    "lowercase": "\u0451",
-    "name": "yo",
+    "name": "e",
     "example": ""
   },
   {
@@ -56,13 +50,13 @@
   {
     "uppercase": "\u0418",
     "lowercase": "\u0438",
-    "name": "i",
+    "name": "u",
     "example": ""
   },
   {
     "uppercase": "\u0419",
     "lowercase": "\u0439",
-    "name": "i (short)",
+    "name": "yi",
     "example": ""
   },
   {
@@ -162,26 +156,14 @@
     "example": ""
   },
   {
-    "uppercase": "\u042A",
-    "lowercase": "\u044A",
-    "name": "hard sign",
-    "example": ""
-  },
-  {
-    "uppercase": "\u042B",
-    "lowercase": "\u044B",
-    "name": "y",
-    "example": ""
-  },
-  {
     "uppercase": "\u042C",
     "lowercase": "\u044C",
     "name": "soft sign",
     "example": ""
   },
   {
-    "uppercase": "\u042D",
-    "lowercase": "\u044D",
+    "uppercase": "\u0404",
+    "lowercase": "\u0454",
     "name": "e",
     "example": ""
   },
