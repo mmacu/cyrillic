@@ -1,4 +1,5 @@
-import cyrillic from './cyrillic.json'
+import russian from './data/russian.json'
+import ukrainian from './data/ukrainian.json'
 import React, { useState, useEffect } from 'react'
 import { Container, CssBaseline, Button, Grid, Paper, Box, Typography, LinearProgress } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -52,7 +53,7 @@ function App() {
 
   const getAnswers = (correct) => {
     const answers = getRandomSubarray(
-      cyrillic.filter((element) => element !== correct),
+      alphabet.filter((element) => element !== correct),
       ANSWER_COUNT
     )
     const randomIdx = getRandomInt(answers.length - 1)
@@ -60,10 +61,12 @@ function App() {
     return answers
   }
 
-  const [lettersLeft, setLettersLeft] = useState(shuffleArray([...cyrillic]))
+  const [lettersLeft, setLettersLeft] = useState(shuffleArray([...ukrainian]))
   const [currentAnswers, setCurrentAnswers] = useState([])
   const [currentLetterAnswered, setCurrentLetterAnswered] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [alphabetLang, setAlphabetLang] = useState('ukrainian')
+  const [alphabet, setAlphabet] = useState(ukrainian)
 
   useEffect(() => {
     axios.get('https://api.countapi.xyz/hit/cyrillic.me/visits')
@@ -74,7 +77,7 @@ function App() {
   }, [lettersLeft])
 
   const playLetterAudio = () => {
-    const audioPath = process.env.PUBLIC_URL + `/sounds/letters/${lettersLeft[0].uppercase}.mp3`
+    const audioPath = process.env.PUBLIC_URL + `/sounds/${alphabetLang}/letters/${lettersLeft[0].uppercase}.mp3`
     let audio = new Audio(audioPath)
     audio.play()
   }
@@ -93,12 +96,12 @@ function App() {
   }
 
   const isFinished = () => {
-    return progress === cyrillic.length
+    return progress === alphabet.length;
   }
 
   const goNext = () => {
     if (isFinished()) {
-      const shuffledCyrillic = shuffleArray([...cyrillic])
+      const shuffledCyrillic = shuffleArray([...alphabet])
       setLettersLeft(shuffledCyrillic)
       setProgress(0)
     } else if (lettersLeft.length > 0) {
@@ -152,12 +155,12 @@ function App() {
                   color={getButtonColor(answer)}
                   onClick={() => submitAnswer(answer, idx)}
                 >
-                  {t(answer.uppercase)}
+                  {t(alphabetLang + '.' + answer.uppercase)}
                 </Button>
               </Grid>
             ))}
             <Grid item xs={12}>
-              <LinearProgress variant="determinate" value={(progress / cyrillic.length) * 100} />
+              <LinearProgress variant="determinate" value={(progress / alphabet.length) * 100} />
             </Grid>
             <Grid item xs={12}>
               <Button

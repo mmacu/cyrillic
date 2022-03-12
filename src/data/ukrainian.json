@@ -1,0 +1,200 @@
+[
+  {
+    "uppercase": "\u0410",
+    "lowercase": "\u0430",
+    "name": "a",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0411",
+    "lowercase": "\u0431",
+    "name": "b",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0412",
+    "lowercase": "\u0432",
+    "name": "v",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0413",
+    "lowercase": "\u0433",
+    "name": "h",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0490",
+    "lowercase": "\u0491",
+    "name": "g",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0414",
+    "lowercase": "\u0434",
+    "name": "d",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0415",
+    "lowercase": "\u0435",
+    "name": "e",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0416",
+    "lowercase": "\u0436",
+    "name": "zh",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0417",
+    "lowercase": "\u0437",
+    "name": "z",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0418",
+    "lowercase": "\u0438",
+    "name": "y",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0406",
+    "lowercase": "\u0456",
+    "name": "i",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0407",
+    "lowercase": "\u0457",
+    "name": "yi",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0419",
+    "lowercase": "\u0439",
+    "name": "yi",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041A",
+    "lowercase": "\u043A",
+    "name": "k",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041B",
+    "lowercase": "\u043B",
+    "name": "l",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041C",
+    "lowercase": "\u043C",
+    "name": "m",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041D",
+    "lowercase": "\u043D",
+    "name": "n",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041E",
+    "lowercase": "\u043E",
+    "name": "o",
+    "example": ""
+  },
+  {
+    "uppercase": "\u041F",
+    "lowercase": "\u043F",
+    "name": "p",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0420",
+    "lowercase": "\u0440",
+    "name": "r",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0421",
+    "lowercase": "\u0441",
+    "name": "s",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0422",
+    "lowercase": "\u0442",
+    "name": "t",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0423",
+    "lowercase": "\u0443",
+    "name": "u",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0424",
+    "lowercase": "\u0444",
+    "name": "f",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0425",
+    "lowercase": "\u0445",
+    "name": "kh",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0426",
+    "lowercase": "\u0446",
+    "name": "ts",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0427",
+    "lowercase": "\u0447",
+    "name": "ch",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0428",
+    "lowercase": "\u0448",
+    "name": "sh",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0429",
+    "lowercase": "\u0449",
+    "name": "shch",
+    "example": ""
+  },
+  {
+    "uppercase": "\u042C",
+    "lowercase": "\u044C",
+    "name": "soft sign",
+    "example": ""
+  },
+  {
+    "uppercase": "\u0404",
+    "lowercase": "\u0454",
+    "name": "e",
+    "example": ""
+  },
+  {
+    "uppercase": "\u042E",
+    "lowercase": "\u044E",
+    "name": "yu",
+    "example": ""
+  },
+  {
+    "uppercase": "\u042F",
+    "lowercase": "\u044F",
+    "name": "ya",
+    "example": ""
+  }
+]
