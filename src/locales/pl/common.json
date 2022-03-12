@@ -72,5 +72,7 @@
   },
   "restart": "RESET",
   "next": "NASTĘPNY",
-  "sound": "Dźwięk"
+  "sound": "Dźwięk",
+  "my-language": "Mój język",
+  "alphabet": "Alfabet"
 }

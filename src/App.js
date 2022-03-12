@@ -23,6 +23,9 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 
+import LanguageSelect from './LanguageSelect.js'
+import AlphabetSelect from './AlphabetSelect.js'
+
 const ANSWER_COUNT = 6
 
 function App() {
@@ -97,6 +100,17 @@ function App() {
   useEffect(() => {
     setCurrentAnswers(getAnswers(lettersLeft[0]))
   }, [lettersLeft])
+
+  useEffect(() => {
+    const alphabet = alphabetLang === 'russian' ? russian : ukrainian;
+    setAlphabet(alphabet)
+  }, [alphabetLang])
+  
+  useEffect(() => {
+    const shuffledCyrillic = shuffleArray([...alphabet])
+    setLettersLeft(shuffledCyrillic)
+    setProgress(0)
+  }, [alphabet])
 
   const playLetterAudio = () => {
     const audioPath = process.env.PUBLIC_URL + `/sounds/${alphabetLang}/letters/${lettersLeft[0].uppercase}.mp3`
@@ -181,6 +195,12 @@ function App() {
                 }
                 label={t('sound')}
               />
+            </MenuItem >
+            <MenuItem>
+              <LanguageSelect />
+            </MenuItem>
+            <MenuItem>
+              <AlphabetSelect alphabetLang={alphabetLang} setAlphabetLang={setAlphabetLang} />
             </MenuItem>
           </Menu>
           <Box sx={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
