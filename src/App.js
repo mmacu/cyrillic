@@ -159,6 +159,14 @@ function App() {
     }
   }
 
+  const getButtonVariant = (answer) => {
+    if (currentLetterAnswered && lettersLeft[0] === answer) {
+      return 'contained'
+    } else {
+      return 'outlined'
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -212,7 +220,7 @@ function App() {
             {currentAnswers.map((answer, idx) => (
               <Grid item key={answer.uppercase} xs={4}>
                 <Button
-                  variant="outlined"
+                  variant={getButtonVariant(answer)}
                   fullWidth
                   style={{ textTransform: 'none', fontSize: 16 }}
                   color={getButtonColor(answer)}
