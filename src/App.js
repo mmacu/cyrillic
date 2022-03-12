@@ -91,6 +91,7 @@ function App() {
   const [alphabet, setAlphabet] = useState(ukrainian)
   const [settingsMenuAnchor, setSettingsMenuAnchor] = useState(null)
   const [useSound, setUseSound] = useState(true)
+  const [swap, setSwap] = useState(false)
   const settingsOpen = Boolean(settingsMenuAnchor)
 
   useEffect(() => {
@@ -203,7 +204,20 @@ function App() {
                 }
                 label={t('sound')}
               />
-            </MenuItem >
+            </MenuItem>
+            <MenuItem>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={swap}
+                    onChange={(event) => {
+                      setSwap(event.target.checked)
+                    }}
+                  />
+                }
+                label={t('swap')}
+              />
+            </MenuItem>
             <MenuItem>
               <LanguageSelect />
             </MenuItem>
@@ -212,9 +226,16 @@ function App() {
             </MenuItem>
           </Menu>
           <Box sx={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography variant="h3">
-              {lettersLeft[0].uppercase} {lettersLeft[0].lowercase}
-            </Typography>
+            {swap &&
+              <Typography variant="h3">
+                {t(alphabetLang + '.' + lettersLeft[0].uppercase)}
+              </Typography>
+            }
+            {!swap && (
+              <Typography variant="h3">
+                {lettersLeft[0].uppercase} {lettersLeft[0].lowercase}
+              </Typography>
+            )}
           </Box>
           <Grid container spacing={2} sx={{ marginTop: 2 }}>
             {currentAnswers.map((answer, idx) => (
@@ -226,7 +247,7 @@ function App() {
                   color={getButtonColor(answer)}
                   onClick={() => submitAnswer(answer, idx)}
                 >
-                  {t(alphabetLang + '.' + answer.uppercase)}
+                  {swap ? answer.uppercase + ' ' + answer.lowercase : t(alphabetLang + '.' + answer.uppercase)}
                 </Button>
               </Grid>
             ))}
