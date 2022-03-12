@@ -1,9 +1,24 @@
 import russian from './data/russian.json'
 import ukrainian from './data/ukrainian.json'
 import React, { useState, useEffect } from 'react'
-import { Container, CssBaseline, Button, Grid, Paper, Box, Typography, LinearProgress } from '@mui/material'
+import {
+  Container,
+  CssBaseline,
+  Button,
+  Grid,
+  Paper,
+  Box,
+  Typography,
+  LinearProgress,
+  IconButton,
+  Menu,
+  MenuItem,
+  Switch,
+  FormControlLabel
+} from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
+import SettingsIcon from '@mui/icons-material/Settings'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -61,17 +76,24 @@ function App() {
     return answers
   }
 
+  const handleSettingsClose = () => {
+    setSettingsMenuAnchor(null)
+  }
+
   const [lettersLeft, setLettersLeft] = useState(shuffleArray([...ukrainian]))
   const [currentAnswers, setCurrentAnswers] = useState([])
   const [currentLetterAnswered, setCurrentLetterAnswered] = useState(false)
   const [progress, setProgress] = useState(0)
   const [alphabetLang, setAlphabetLang] = useState('ukrainian')
   const [alphabet, setAlphabet] = useState(ukrainian)
+  const [settingsMenuAnchor, setSettingsMenuAnchor] = useState(null)
+  const [useSound, setUseSound] = useState(true)
+  const settingsOpen = Boolean(settingsMenuAnchor)
 
   useEffect(() => {
     axios.get('https://api.countapi.xyz/hit/cyrillic.me/visits')
   }, [])
-  
+
   useEffect(() => {
     setCurrentAnswers(getAnswers(lettersLeft[0]))
   }, [lettersLeft])
@@ -83,7 +105,9 @@ function App() {
   }
 
   const submitAnswer = (answer) => {
-    playLetterAudio()
+    if (useSound) {
+      playLetterAudio()
+    }
     if (currentLetterAnswered) {
       return
     }
@@ -96,7 +120,7 @@ function App() {
   }
 
   const isFinished = () => {
-    return progress === alphabet.length;
+    return progress === alphabet.length
   }
 
   const goNext = () => {
@@ -138,8 +162,27 @@ function App() {
             flexDirection: 'column',
             borderRadius: 4,
             padding: 4,
+            position: 'relative',
           }}
         >
+          <IconButton sx={{ position: 'absolute', top: 4, left: 4 }}>
+            <SettingsIcon onClick={(event) => setSettingsMenuAnchor(event.currentTarget)} />
+          </IconButton>
+          <Menu sx={{ maxWidth: 250 }} anchorEl={settingsMenuAnchor} open={settingsOpen} onClose={handleSettingsClose}>
+            <MenuItem>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={useSound}
+                    onChange={(event) => {
+                      setUseSound(event.target.checked)
+                    }}
+                  />
+                }
+                label={t('sound')}
+              />
+            </MenuItem>
+          </Menu>
           <Box sx={{ minHeight: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Typography variant="h3">
               {lettersLeft[0].uppercase} {lettersLeft[0].lowercase}
