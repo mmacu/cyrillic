@@ -95,7 +95,7 @@ function App() {
   const settingsOpen = Boolean(settingsMenuAnchor)
 
   useEffect(() => {
-    axios.get('https://api.countapi.xyz/hit/cyrillic.me/visits')
+    axios.get(process.env.REACT_APP_COUNTER_URL)
   }, [])
 
   useEffect(() => {
